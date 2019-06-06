@@ -1,0 +1,187 @@
+<html>
+
+	<head>
+	
+		<title>Jquery Project</title>
+		
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+         <script src="jqueryui/jquery-ui.js"></script>
+
+         <link href="jqueryui/jquery-ui.css" rel="stylesheet">
+
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+         
+		<style type ="text/css">
+            .inputs {
+                                
+                border: 2px solid black;
+                border-radius: 5px;
+                width: 24%;            
+                
+                                
+            }
+
+            #menu {
+                width: 100%;
+                border-radius: 5px;
+                background-color: #EEEEEE;
+                float: left;
+
+            }
+
+            body {
+                width: 100%;
+                margin: 2px 2px;
+            }
+
+            button {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 20px;
+                padding: 7px;
+                margin: 1px;
+                color: black;
+                background-color: whitesmoke;
+                border-radius: 6px;
+                
+                
+
+            }
+
+            #buttons {
+                width: 75%;
+                margin: 0 auto;
+                float: left;
+                position: relative;
+                left: 30%;
+                
+                
+            }
+
+            button:hover {
+                background-color: grey;
+                
+                
+            }
+            
+            #heading {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 26px;
+                color: black;
+                margin: 0;
+                width:25%;
+
+            }
+
+            #mainSection {
+                width: 100%;
+                float: left;
+                height: 100%;
+            }
+
+            textarea {
+                padding:0;
+                margin:0;
+                resize: none;
+                height: 90%;
+            }
+
+            iframe {
+                height: 89.5%;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .active {
+                background-color: lightcyan;
+            }
+                        				
+		</style>
+		
+		
+    </head>
+    
+	<body>
+        <div id="menu">
+
+            <p id="heading">Code Player</p>
+
+            <div id="buttons">
+                <button id="html" class="toggleButton active">HTML</button>
+                <button id="css" class="toggleButton active">CSS</button>
+                <button id="js" class="toggleButton active">JavaScript</button>
+                <button id="output" class="toggleButton active">Output</button>
+            </div>
+
+        </div>
+
+        <div id="mainSection">
+
+            
+            <textarea id="htmlInput" class="inputs"><p id="demo">Hello</p></textarea>
+            
+
+            
+            <textarea id="cssInput" class="inputs">p { color: green; }</textarea>
+           
+
+            
+            <textarea id="jsInput" class="inputs">document.getElementById("demo").innerHTML = "";</textarea>
+            
+
+            
+            <iframe id="outputInput" class="inputs"></iframe>
+            
+        
+        </div>
+
+        <script type="text/javascript">
+
+            function updateOutput() {
+
+                 $("#outputInput").contents().find("html").html("<html><head><style type='text/css'>" + $("#cssInput").val() + "</style></head><body>" + $("#htmlInput").val() + "</body></html>");
+                
+                document.getElementById("outputInput").contentWindow.eval($("#jsInput").val());
+                
+            }
+
+            updateOutput();
+
+            
+
+            $(".toggleButton").click(function(){
+
+                $(this).toggleClass("active");
+
+                var panelId = $(this).attr("id") + "Input";
+
+                $("#" + panelId).toggleClass("hidden");
+
+                var activePanels = 4 - $('.hidden').length;
+
+                $(".inputs").width(($(window).width() / activePanels) - 10);         
+
+
+            });
+
+                              
+
+            $(".Inputs").on('change keyup paste', function(){
+
+               updateOutput();
+
+            });
+
+                   
+
+		</script>
+	
+	
+	</body>
+	
+		
+	
+</html>
